@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-
+    public GameManager gameManager;
+    public bool IsDead = false;
     public float velocity = 2.4f;
-
-    private Rigidbody2D rigidbody;
+    public Rigidbody2D rigidbody;
+    public Animator anim;
+    // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -21,4 +24,12 @@ public class Player : MonoBehaviour
             rigidbody.velocity = Vector2.up * velocity;  
         }      
     }
+
+    private void OnCollisionEnter20(Collision2D other)
+    {
+            IsDead = true;
+            gameManager.GameOver();
+    }
 }
+
+
